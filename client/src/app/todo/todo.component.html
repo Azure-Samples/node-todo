@@ -1,0 +1,48 @@
+<div style="min-height: 307.8px">
+    <h3>
+        <button type="button" class="btn btn-primary btn-xs pull-right" (click)="refresh()">
+            <span class="glyphicon glyphicon-refresh"></span>
+        </button>
+        Todo
+    </h3>
+    <div style="padding: 10px;">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <form class="form-inline">
+                    <div class="form-group">
+                        <label for="todoInput">Todo text:</label> <input #todoInput id="todoInput" type="text" class="form-control"
+                            placeholder="Text here..." />
+                        <button type="button" class="btn btn-primary" (click)="create(todoInput.value); todoInput.value=''">
+                            Add
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <ul *ngIf="loaded" class="list-group" style="margin-bottom: 0px;">
+            <li class="list-group-item" *ngFor="let todo of todos" style="min-height: 53.45px">
+                <div class="btn-group pull-right" role="group" aria-label="...">
+                    <button *ngIf="!todo.done" type="button" class="btn btn-default" (click)="toggleDone(todo)">
+                        <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                    </button>
+                    <button *ngIf="todo.done" type="button" class="btn btn-default btn-success" (click)="toggleDone(todo)">
+                        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                    </button>
+                    <button type="button" class="btn btn-default" (click)="remove(todo)">
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                    </button>
+                </div>
+                <p>{{todo.text}}</p>
+            </li>
+        </ul>
+
+        <div *ngIf="loaded && todos.length==0" class="text-center" style="font-size: 50px;">
+            <span class="glyphicon glyphicon-hand-up pulse"></span> Add an item!
+        </div>
+
+        <div *ngIf="!loaded" class="text-center" style="margin-top: 10px; margin-bottom: 50px;"> 
+            <span class="glyphicon glyphicon-refresh loading" style="font-size: 100px;"></span>
+        </div>
+    </div>
+</div>

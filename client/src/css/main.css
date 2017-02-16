@@ -1,0 +1,91 @@
+body {
+    font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+}
+
+h1 {
+    color: #369;
+    font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+    font-size: 250%;
+    font-weight: bold;
+    margin-top: 30px;
+    margin-bottom: 22px;
+}
+
+a {
+    text-decoration: none;
+    color: #337ab7;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.header-container, .main-container, .footer-container {
+    width: 700px;
+    margin: 0 auto;
+}
+
+.main-container {
+    margin-bottom: 20px;
+    box-shadow: 0 1px 4px 0 rgba(0,0,0,0.37);
+}
+
+.main-container .resource, .main-container h3 {
+    padding: 16px 23px;
+}
+
+.main-container h3 {
+    margin: 0;
+    color: #373E41;
+    font-size: 20px;
+    min-height: "63.45px";
+    font-weight: bold;
+    background-color: #ECEFF1;
+}
+
+.main-container h4 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 24px;
+}
+
+.main-container p {
+    margin: 0;
+}
+
+.loading {
+    -webkit-animation: loadingAnimation 1s 20 ease;
+    -moz-animation: loadingAnimation 1s 20 ease;
+    -o-animation: loadingAnimation 1s 20 ease;
+}
+@-webkit-keyframes loadingAnimation {
+    from { -webkit-transform: rotate(4deg) scale(1) skew(1deg) translate(10px); }
+    to { -webkit-transform: rotate(360deg) scale(0.795) skew(1deg) translate(0px); }
+}
+@-moz-keyframes loadingAnimation {
+    from { -moz-transform: rotate(4deg) scale(1) skew(1deg) translate(10px); }
+    to { -moz-transform: rotate(360deg) scale(0.795) skew(1deg) translate(0px); }
+}
+@-o-keyframes loadingAnimation {
+    from { -o-transform: rotate(4deg) scale(1) skew(1deg) translate(10px); }
+    to { -o-transform: rotate(360deg) scale(0.795) skew(1deg) translate(0px); }
+}
+
+.pulse {
+-webkit-animation: pulseAnimation 1s infinite ease;
+-moz-animation: pulseAnimation 1s infinite ease;
+-o-animation: pulseAnimation 1s infinite ease;
+}
+@-webkit-keyframes pulseAnimation {
+from { -webkit-transform: rotate(0deg) scale(1) skew(0deg) translate(0px, 10px); }
+to { -webkit-transform: rotate(0deg) scale(1.5) skew(0deg) translate(0px, -10px); }
+}
+@-moz-keyframes pulseAnimation {
+from { -moz-transform: rotate(0deg) scale(1) skew(0deg) translate(0px, 10px); }
+to { -moz-transform: rotate(0deg) scale(1.5) skew(0deg) translate(0px, -10px); }
+}
+@-o-keyframes pulseAnimation {
+from { -o-transform: rotate(0deg) scale(1) skew(0deg) translate(0px, 10px); }
+to { -o-transform: rotate(0deg) scale(1.5) skew(0deg) translate(0px, -10px); }
+}

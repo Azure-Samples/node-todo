@@ -6,7 +6,7 @@ const d = debug("azure-node-todo:PostgresService");
 
 let service: PostgresService;
 
-export const DEFAULT_CONFIG: pg.PoolConfig = {
+export let DEFAULT_CONFIG: pg.PoolConfig = {
     user: process.env.PGUSER,
     // tslint:disable-next-line:object-literal-sort-keys
     password: process.env.PGPASSWORD,
@@ -19,18 +19,50 @@ export const DEFAULT_CONFIG: pg.PoolConfig = {
 };
 
 export class PostgresService {
+    public static parseConnectionString(connstr: string): any {
+        const output: any = {};
+        const parts = connstr.split(";");
+        d(parts);
+        for (const part of parts) {
+            d(part);
+            const[key, value] = part.split("=", 2);
+            switch (key.toLowerCase()) {
+                case "database":
+                    output.database = value;
+                    break;
+                case "data source":
+                    output.host = value;
+                    break;
+                case "user id":
+                    output.user = value;
+                    break;
+                case "password":
+                    output.password = value;
+                    break;
+                default:
+                    d(`Unknown key found in connection string: ${key}`);
+                    break;
+            }
+        }
+        d(`Parsed connection string to ${JSON.stringify(output, null, " ")}`);
+        return output;
+    }
+
     public static getDefault(): PostgresService {
         if (service) {
             d("Returning default service");
             return service;
         } else {
             d("Creating a new service");
-            /*let config;
-            if(process.env.PGCONNECTIONSTRING)
-            {
-                config = Object.apply(DEFAULT_CONFIG, pgconn.parse(process.env.PGCONNECTIONSTRING));
-            }*/
-            service = new PostgresService(DEFAULT_CONFIG);
+            let config = DEFAULT_CONFIG;
+            if (process.env.PGCONNECTIONSTRING || process.env.POSTGRESQLCONNSTR_defaultconnection) {
+                d("Using PGCONNECTIONSTRING for connection");
+                config = Object.assign({}, DEFAULT_CONFIG,
+                    PostgresService.parseConnectionString(process.env.PGCONNECTIONSTRING
+                                                            || process.env.POSTGRESQLCONNSTR_defaultconnection));
+            }
+            d(`Using config: \n ${JSON.stringify(config, null, " ")}`);
+            service = new PostgresService(config);
             return service;
         }
     }

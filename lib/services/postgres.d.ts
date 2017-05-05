@@ -1,6 +1,7 @@
 import * as pg from "pg";
-export declare const DEFAULT_CONFIG: pg.PoolConfig;
+export declare let DEFAULT_CONFIG: pg.PoolConfig;
 export declare class PostgresService {
+    static parseConnectionString(connstr: string): any;
     static getDefault(): PostgresService;
     static createDatabaseIfNotExists(newDatabaseName: string): Promise<boolean>;
     pool: pg.Pool;

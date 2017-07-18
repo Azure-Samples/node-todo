@@ -25,7 +25,12 @@ export class TodoModel {
      */
     public async initialize() {
         // This can take a while...
-        await PostgresService.createDatabaseIfNotExists(DEFAULT_CONFIG.database);
+        try {
+            await PostgresService.createDatabaseIfNotExists(DEFAULT_CONFIG.database);
+         } catch (e) {
+             d("Failed to create database, might not be able to connect to database if it doesn't already exist");
+             d(e);
+         }
         const client = await this.db.pool.connect();
         await this.createSchemaIfNotExists(client);
         await this.createTableIfNotExists(client);

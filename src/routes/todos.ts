@@ -16,11 +16,13 @@ todoRouter.get("/", async (req, res, next) => {
 todoRouter.get("/:id", async (req, res, next) => {
     const id = req.param("id");
     if (!id) {
-        return res.json(404, {});
+        res.status(404);
+        return res.json({});
     }
     const results = await todoModel.get(Number.parseInt(id));
     if (!results) {
-        res.json(404, {});
+        res.status(404);
+        res.json({});
     } else {
         res.json(results);
     }
@@ -29,7 +31,8 @@ todoRouter.get("/:id", async (req, res, next) => {
 todoRouter.put("/", async (req, res, next) => {
     const text = req.body.text;
     if (!text) {
-        res.json(400, {
+        res.status(400);
+        res.json({
             error: "Body must contain \"text\" property",
         });
         return;
@@ -42,11 +45,13 @@ todoRouter.put("/", async (req, res, next) => {
 todoRouter.post("/:id/toggleDone", async (req, res, next) => {
     const id = req.param("id");
     if (!id) {
-        return res.json(404, {});
+        res.status(404);
+        return res.json({});
     }
     const results = await todoModel.toggleDone(Number.parseInt(id));
     if (!results) {
-        res.json(404, {});
+        res.json(404);
+        res.json({});
     } else {
         res.json(results);
     }
@@ -55,11 +60,13 @@ todoRouter.post("/:id/toggleDone", async (req, res, next) => {
 todoRouter.delete("/:id", async (req, res, next) => {
     const id = req.param("id");
     if (!id) {
-        return res.json(404, {});
+        res.status(404);
+        return res.json({});
     }
     const results = await todoModel.remove(Number.parseInt(id));
     if (!results) {
-        res.json(404, {});
+        res.status(404);
+        res.json({});
     } else {
         res.json(results);
     }

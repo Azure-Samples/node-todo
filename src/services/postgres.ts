@@ -31,6 +31,7 @@ export class PostgresService {
                     output.database = value;
                     break;
                 case "data source":
+                case "server":
                     output.host = value;
                     break;
                 case "user id":
